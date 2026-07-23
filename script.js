@@ -1,0 +1,211 @@
+/* Cultures Connect: shared script for every page.
+   To change the fortnight, scroll to the FORTNIGHT block below.
+   It now lives here instead of index.html, so you edit it in one place. */
+
+/* Flag data URIs (square SVGs, lipis/flag-icons, public domain). Bundled so the site has no external image dependency, which matters on locked-down school networks. */
+const FLAGS = {
+  fr: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJmbGFnLWljb25zLWZyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGg1MTJ2NTEySDB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMDA5MSIgZD0iTTAgMGgxNzAuN3Y1MTJIMHoiLz4KICA8cGF0aCBmaWxsPSIjZTEwMDBmIiBkPSJNMzQxLjMgMEg1MTJ2NTEySDM0MS4zeiIvPgo8L3N2Zz4K",
+  cn: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1jbiIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxkZWZzPgogICAgPHBhdGggaWQ9ImNuLWEiIGZpbGw9IiNmZjAiIGQ9Ik0xLS4zLS43LjggMC0xIC42LjgtMS0uM3oiLz4KICA8L2RlZnM+CiAgPHBhdGggZmlsbD0iI2VlMWMyNSIgZD0iTTAgMGg1MTJ2NTEySDB6Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjY24tYSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjggMTI4KXNjYWxlKDc2LjgpIi8+CiAgPHVzZSB4bGluazpocmVmPSIjY24tYSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIxIDE0Mi42IC00NylzY2FsZSgyNS41ODI3KSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2NuLWEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTk4LjEgMTk4IC04MilzY2FsZSgyNS42KSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2NuLWEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTc0IDI3Mi40IC0xMTQpc2NhbGUoMjUuNjEzNykiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNjbi1hIiB3aWR0aD0iMzAiIGhlaWdodD0iMjAiIHRyYW5zZm9ybT0ibWF0cml4KDE2IC0xOS45NjggMTkuOTY4IDE2IDI1NiAyMzAuNCkiLz4KPC9zdmc+Cg==",
+  jp: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJmbGFnLWljb25zLWpwIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImpwLWEiPgogICAgICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii43IiBkPSJNMTc3LjIgMGg3MDguNnY3MDguN0gxNzcuMnoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxnIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIxcHQiIGNsaXAtcGF0aD0idXJsKCNqcC1hKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyOClzY2FsZSguNzIyNDkpIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMTA2M3Y3MDguN0gweiIvPgogICAgPGNpcmNsZSBjeD0iNTIzLjEiIGN5PSIzNDQuMSIgcj0iMTk0LjkiIGZpbGw9IiNiYzAwMmQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01OS43IC0zNC41KXNjYWxlKDEuMTMwMikiLz4KICA8L2c+Cjwvc3ZnPgo=",
+  kr: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1rciIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgMGg1MTJ2NTEySDBaIi8+CiAgPGcgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InJvdGF0ZSgtNTYuMyAzNjcuMiAtMTExLjIpc2NhbGUoOS4zNzUpIj4KICAgIDxnIGlkPSJrci1iIj4KICAgICAgPHBhdGggaWQ9ImtyLWEiIGZpbGw9IiMwMDAwMDEiIGQ9Ik0tNi0yNkg2djJILTZabTAgM0g2djJILTZabTAgM0g2djJILTZaIi8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2tyLWEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHk9IjQ0Ii8+CiAgICA8L2c+CiAgICA8cGF0aCBzdHJva2U9IiNmZmYiIGQ9Ik0wIDE3djEwIi8+CiAgICA8cGF0aCBmaWxsPSIjY2QyZTNhIiBkPSJNMC0xMmExMiAxMiAwIDAgMSAwIDI0WiIvPgogICAgPHBhdGggZmlsbD0iIzAwNDdhMCIgZD0iTTAtMTJhMTIgMTIgMCAwIDAgMCAyNEE2IDYgMCAwIDAgMCAwWiIvPgogICAgPGNpcmNsZSBjeT0iLTYiIHI9IjYiIGZpbGw9IiNjZDJlM2EiLz4KICA8L2c+CiAgPGcgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIzLjcgMTk2LjUgNTkuNSlzY2FsZSg5LjM3NSkiPgogICAgPHVzZSB4bGluazpocmVmPSIja3ItYiIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPgogICAgPHBhdGggc3Ryb2tlPSIjZmZmIiBkPSJNMC0yMy41djNNMCAxN3YzLjVtMCAzdjMiLz4KICA8L2c+Cjwvc3ZnPgo=",
+  in: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1pbiIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxwYXRoIGZpbGw9IiNmOTMiIGQ9Ik0wIDBoNTEydjE3MC43SDB6Ii8+CiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMTcwLjdoNTEydjE3MC42SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzEyODgwNyIgZD0iTTAgMzQxLjNoNTEyVjUxMkgweiIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1NiAyNTYpc2NhbGUoMy40MTMzMykiPgogICAgPGNpcmNsZSByPSIyMCIgZmlsbD0iIzAwOCIvPgogICAgPGNpcmNsZSByPSIxNy41IiBmaWxsPSIjZmZmIi8+CiAgICA8Y2lyY2xlIHI9IjMuNSIgZmlsbD0iIzAwOCIvPgogICAgPGcgaWQ9ImluLWQiPgogICAgICA8ZyBpZD0iaW4tYyI+CiAgICAgICAgPGcgaWQ9ImluLWIiPgogICAgICAgICAgPGcgaWQ9ImluLWEiIGZpbGw9IiMwMDgiPgogICAgICAgICAgICA8Y2lyY2xlIHI9Ii45IiB0cmFuc2Zvcm09InJvdGF0ZSg3LjUgLTguOCAxMzMuNSkiLz4KICAgICAgICAgICAgPHBhdGggZD0iTTAgMTcuNS42IDcgMCAybC0uNiA1eiIvPgogICAgICAgICAgPC9nPgogICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjaW4tYSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoMTUpIi8+CiAgICAgICAgPC9nPgogICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2luLWIiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDMwKSIvPgogICAgICA8L2c+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2luLWMiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPC9nPgogICAgPHVzZSB4bGluazpocmVmPSIjaW4tZCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwKSIvPgogICAgPHVzZSB4bGluazpocmVmPSIjaW4tZCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCkiLz4KICA8L2c+Cjwvc3ZnPgo=",
+  mn: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmQ5MDAiIGlkPSJmbGFnLWljb25zLW1uIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPHBhdGggZmlsbD0iI2RhMjAzMiIgZD0iTTAgMGg1MTJ2NTEySDBaIi8+CiAgPHBhdGggZmlsbD0iIzAwNjZiMyIgZD0iTTE3MC43IDBoMTcwLjZ2NTEySDE3MC43WiIvPgogIDxjaXJjbGUgY3g9Ijg1LjMiIGN5PSIxOTYuNiIgcj0iMzUiLz4KICA8Y2lyY2xlIGN4PSI4NS4zIiBjeT0iMTgwLjciIHI9IjM4LjIiIGZpbGw9IiNkYTIwMzIiLz4KICA8Y2lyY2xlIGN4PSI4NS4zIiBjeT0iMTg3IiByPSIyNS41Ii8+CiAgPHBhdGggZD0iTTg4IDEwNC4zYTggOCAwIDAgMC00LjYgNi42Yy0uMiAyLjIuOCA0LjYuOSA2LjcgMCAzLjctMy44IDQuOS0zLjggMTAuMSAwIDEuOCAxLjcgMy44IDEuNyA4LjQtLjMgMi41LTEuNyAzLTMuMiAzLjJhMyAzIDAgMCAxLTMuMi0zLjIgMyAzIDAgMCAxIC45LTIuMmwuMy0uM2MuNy0uNyAxLjctMSAxLjctMyAwLTEtLjYtMS44LTEuMi0zLjZhNyA3IDAgMCAxIDEuMi02LjJjLTIuMi44LTMuNiAzLTQuMyA0LjktLjcgMi4zLS4xIDMuNy0xLjEgNS43LS42IDEuMi0xLjQgMS43LTIgMi44LS45IDEuMi0xLjggMy44LTEuOCA1LjFhMTYgMTYgMCAwIDAgMzEuOCAwYzAtMS4zLTEtNC0xLjgtNS4xLS43LTEtMS41LTEuNi0yLTIuOC0xLTItLjQtMy40LTEuMi01LjctLjctMi0yLTQtNC4zLTVhNyA3IDAgMCAxIDEuMyA2LjNjLS43IDEuOC0xLjMgMi43LTEuMyAzLjcgMCAxLjkgMSAyLjIgMS43IDNsLjMuMmEzIDMgMCAwIDEgMSAyLjIgMyAzIDAgMCAxLTMuMyAzLjJxLTIuNy0uMS0zLjItMy4yYzAtNi4xIDIuNy02LjUgMi43LTExIDAtNi41LTUuOC05LjYtNS44LTE0LjMgMC0xLjYuMy00LjMgMi42LTYuNU0xNS4zIDIzNy45aDMxLjl2MTUyLjhIMTUuM1ptMTA4LjIgMGgzMS44djE1Mi44aC0zMS44em0tNzAgMGg2My43TDg1LjMgMjU3Wm0wIDI1LjVoNjMuN1YyNzZINTMuNVptMCA4OWg2My43djEyLjhINTMuNVptMCAxOS4yaDYzLjdsLTMxLjkgMTlaIi8+CiAgPGNpcmNsZSBjeD0iODUuMyIgY3k9IjMxNC4zIiByPSIzMS44Ii8+CiAgPGcgZmlsbD0iI2RhMjAzMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyIDY2LjEpc2NhbGUoLjYzNjM2KSI+CiAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIzNjMuNSIgcj0iMTAiLz4KICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjQxNi41IiByPSIxMCIvPgogICAgPHBhdGggZD0iTTIwMCAzMzRhMjkuNSAyOS41IDAgMCAxIDAgNTkgMjMuNSAyMy41IDAgMCAwIDAgNDd2NmEyOS41IDI5LjUgMCAwIDEgMC01OSAyMy41IDIzLjUgMCAwIDAgMC00N3oiLz4KICA8L2c+Cjwvc3ZnPgo=",
+};
+/* ===== EDIT EACH FORTNIGHT HERE =====
+   value + idiom drive the hero and the faded backdrop word.
+   Each card: lang, flag (country code), phrase (the big English line),
+   gloss (the saying in its own script), optional roman (romanisation),
+   and optional objPos to keep a hoist-side symbol in frame when the
+   square flag is cropped into the card.
+   The 7th invitation card is added automatically below, so you never edit it. */
+const FORTNIGHT = {
+  value:"Collaboration",
+  idiom:"\u201CMany hands make light work\u201D",
+  cards:[
+    { lang:"French",   flag:"fr", phrase:"\u201CUnion makes strength\u201D",           gloss:"L'union fait la force" },
+    { lang:"Chinese",  flag:"cn", phrase:"\u201CWhen everyone gathers firewood, the flames rise high\u201D", gloss:"\u4F17\u4EBA\u62FE\u67F4\u706B\u7130\u9AD8" },
+    { lang:"Japanese", flag:"jp", phrase:"\u201CWhen three people gather, the wisdom of a sage appears\u201D", gloss:"\u4E09\u4EBA\u5BC4\u308C\u3070\u6587\u6B8A\u306E\u77E5\u6075" },
+    { lang:"Korean",   flag:"kr", phrase:"\u201CEven a sheet of paper is lighter when lifted together\u201D", gloss:"\uBC31\uC9C0\uC7A5\uB3C4 \uB9DE\uB4E4\uBA74 \uB0AB\uB2E4" },
+    { lang:"Hindi",    flag:"in", phrase:"\u201COne and one make eleven\u201D", gloss:"\u090F\u0915 \u0914\u0930 \u090F\u0915 \u0917\u094D\u092F\u093E\u0930\u0939" },
+    { lang:"Mongolian",flag:"mn", phrase:"\u201COne branch can't make a fire, one person can't make a family\u201D",
+      gloss:"\u0413\u0430\u043D\u0446 \u043C\u043E\u0434 \u0433\u0430\u043B \u0431\u043E\u043B\u043E\u0445\u0433\u04AF\u0439, \u0433\u0430\u043D\u0446 \u0445\u04AF\u043D \u0430\u0439\u043B \u0431\u043E\u043B\u043E\u0445\u0433\u04AF\u0439",
+      roman:"Gants mod gal bolokhgui, gants khun ail bolokhgui", objPos:"left center" }
+  ]
+};
+/* nav scroll bg */
+var nav = document.getElementById("nav");
+if(nav){ addEventListener("scroll", function(){ nav.classList.toggle("scrolled", scrollY>20); }, {passive:true}); }
+/* The contribute form posts straight to Formspree, set in contribute.html.
+   Nothing to intercept here, so the browser handles the submit itself. */
+/* ===== CAROUSEL (home) ===== */
+(function carousel(){
+  var track = document.getElementById("track");
+  if(!track) return;
+
+  /* The invitation card. Stays locked out of the carousel until every language
+     has been centred at least once, then unlocks as the next card along.
+     It never changes between fortnights, so Kai only ever edits FORTNIGHT above. */
+  var ADD_CARD = {
+    add:true,
+    lang:"Your culture",
+    face:"Missing yours?",
+    faceSub:"tap to add",
+    phrase:"We haven't heard yours yet.",
+    gloss:"Tell us the saying your family uses."
+  };
+
+  var LANGS = FORTNIGHT.cards.length;
+  var ITEMS = FORTNIGHT.cards.concat([ADD_CARD]);
+  var seen = {}, seenCount = 0, unlocked = false;
+
+  var titleEl = document.getElementById("value-name");
+  if(titleEl) titleEl.textContent = FORTNIGHT.value;
+
+  var idiomEl = document.getElementById("idiom");
+  if(idiomEl){ idiomEl.innerHTML = FORTNIGHT.idiom.split(" ").map(function(w,i,a){
+    return '<span class="w"><span>'+w+'</span></span>'+(i<a.length-1?"&nbsp;":""); }).join(""); }
+
+  var dotsWrap = document.getElementById("dots");
+
+  ITEMS.forEach(function(c,i){
+    var card=document.createElement("div");
+    card.className = "card" + (c.add ? " card-add" : "");
+    card.dataset.index=i; card.tabIndex=0; card.setAttribute("role","button");
+
+    if(c.add){
+      card.setAttribute("aria-label","Add a saying from your culture");
+      card.innerHTML = '<span class="add-plus">+</span>'+
+                       '<span class="add-title">'+c.face+'</span>'+
+                       '<span class="add-sub">'+c.faceSub+'</span>';
+    } else {
+      card.setAttribute("aria-label", c.lang+" flag, show its saying");
+      var img=document.createElement("img");
+      img.src=FLAGS[c.flag]||""; img.alt=c.lang+" flag";
+      if(c.objPos) img.style.objectPosition=c.objPos;
+      card.appendChild(img);
+    }
+    track.appendChild(card);
+
+    var d=document.createElement("div");
+    d.className="cdot"+(c.add?" cdot-add":"")+(i===0?" active":"");
+    d.dataset.index=i; d.tabIndex=0; d.setAttribute("role","button");
+    d.setAttribute("aria-label", c.add ? "Add your own saying" : "Show "+c.lang);
+    dotsWrap.appendChild(d);
+  });
+
+  var cards=track.querySelectorAll(".card");
+  var dots=dotsWrap.querySelectorAll(".cdot");
+  var info=document.querySelector(".member-info");
+  var miLang=document.getElementById("mi-lang");
+  var miSay=document.getElementById("mi-saying");
+  var miMean=document.getElementById("mi-meaning");
+  var miRom=document.getElementById("mi-roman");
+  var cur=0, anim=false;
+
+  var softScroll = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  function goToInvite(){
+    var band=document.querySelector(".band");
+    if(band) band.scrollIntoView({behavior:softScroll, block:"center"});
+  }
+
+  /* how many cards are actually in the rotation right now */
+  function count(){ return unlocked ? ITEMS.length : LANGS; }
+
+  function update(n){
+    if(anim) return; anim=true;
+    var N=count();
+    cur=(n+N)%N;
+    cards.forEach(function(card,i){
+      card.classList.remove("center","left-1","left-2","right-1","right-2","hidden");
+      if(i>=N){ card.classList.add("hidden"); return; }   /* still locked */
+      var off=(i-cur+N)%N;
+      if(off===0) card.classList.add("center");
+      else if(off===1) card.classList.add("right-1");
+      else if(off===2) card.classList.add("right-2");
+      else if(off===N-1) card.classList.add("left-1");
+      else if(off===N-2) card.classList.add("left-2");
+      else card.classList.add("hidden");
+    });
+    dots.forEach(function(d,i){
+      d.classList.toggle("active", i===cur);
+      d.classList.toggle("cdot-locked", i>=N);
+    });
+    info.style.opacity="0";
+    setTimeout(function(){
+      var c=ITEMS[cur];
+      miLang.textContent=c.lang; miSay.textContent=c.phrase; miMean.textContent=c.gloss;
+      if(c.roman){ miRom.textContent=c.roman; miRom.style.display=""; } else { miRom.textContent=""; miRom.style.display="none"; }
+      info.style.opacity="1";
+    },300);
+    /* Marked after the render, so unlocking takes effect on the NEXT move.
+       That way the last language stays centred and the invitation arrives
+       on the following arrow click rather than appearing mid-view. */
+    if(!unlocked && !ITEMS[cur].add && !seen[cur]){
+      seen[cur]=true; seenCount++;
+      if(seenCount===LANGS) unlocked=true;
+    }
+    setTimeout(function(){ anim=false; },800);
+  }
+
+  /* Clicks only. Arrows, keyboard and swipe never trigger the scroll,
+     so navigating past the invitation card doesn't hijack the page. */
+  function activate(i){
+    if(ITEMS[i].add){
+      if(i!==cur){ update(i); setTimeout(goToInvite,420); }
+      else { goToInvite(); }
+    } else { update(i); }
+  }
+
+  document.querySelector(".nav-arrow.left").addEventListener("click", function(){ update(cur-1); });
+  document.querySelector(".nav-arrow.right").addEventListener("click", function(){ update(cur+1); });
+  dots.forEach(function(d,i){
+    d.addEventListener("click", function(){ activate(i); });
+    d.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); activate(i); } });
+  });
+  cards.forEach(function(card,i){
+    card.addEventListener("click", function(){ activate(i); });
+    card.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); activate(i); } });
+  });
+  document.addEventListener("keydown", function(e){ if(e.key==="ArrowLeft") update(cur-1); else if(e.key==="ArrowRight") update(cur+1); });
+  // swipe, scoped to the carousel so it never hijacks page scrolling.
+  // Must be more horizontal than vertical, otherwise a diagonal scroll flips cards.
+  var sec=document.querySelector(".carousel-section"); var sx=0, sy=0;
+  sec.addEventListener("touchstart", function(e){ sx=e.changedTouches[0].screenX; sy=e.changedTouches[0].screenY; }, {passive:true});
+  sec.addEventListener("touchend", function(e){
+    var dx=sx-e.changedTouches[0].screenX;
+    var dy=sy-e.changedTouches[0].screenY;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ dx>0?update(cur+1):update(cur-1); }
+  }, {passive:true});
+  update(0);
+})();
+/* ===== MOTION (hero text + reveals) ===== */
+var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(window.gsap && !reduce){
+  gsap.registerPlugin(ScrollTrigger);
+  document.body.classList.add("is-animating");
+  gsap.set("#nav",{y:-20,opacity:0});
+  gsap.to("#nav",{y:0,opacity:1,duration:.7,ease:"power3.out",delay:.05});
+  gsap.utils.toArray(".reveal").forEach(function(el){
+    gsap.from(el,{ y:22,opacity:0,duration:.8,ease:"power3.out", scrollTrigger:{ trigger:el, start:"top 88%" } });
+  });
+  if(document.getElementById("track")){
+    gsap.set(".eyebrow",{y:12,opacity:0});
+    gsap.set(".idiom .w>span",{y:"110%"});
+    gsap.set(".sub",{y:14,opacity:0});
+    gsap.set(".carousel-container",{y:30,opacity:0});
+    gsap.set(".member-info",{opacity:0});
+    gsap.set(".dots",{opacity:0});
+    gsap.set(".verify",{y:12,opacity:0});
+    var tl=gsap.timeline({defaults:{ease:"power3.out"}});
+    tl.to(".eyebrow",{y:0,opacity:1,duration:.6},.15)
+      .to(".idiom .w>span",{y:"0%",duration:.85,stagger:.06},.28)
+      .to(".sub",{y:0,opacity:1,duration:.7},.6)
+      .to(".carousel-container",{y:0,opacity:1,duration:.9},.75)
+      .to(".member-info",{opacity:1,duration:.6},1.2)
+      .to(".dots",{opacity:1,duration:.5},1.3)
+      .to(".verify",{y:0,opacity:1,duration:.6},1.4);
+  }
+  var band=document.querySelector(".band-inner");
+  if(band){ gsap.from(band,{ y:60,scale:.98,opacity:0,duration:1.05,ease:"power3.out", scrollTrigger:{ trigger:".band", start:"top 84%" } }); }
+  gsap.from(".foot p",{ y:16,opacity:0,duration:.7,stagger:.08,ease:"power3.out", scrollTrigger:{ trigger:".foot", start:"top 94%" } });
+}
