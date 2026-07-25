@@ -201,3 +201,41 @@ body.is-animating .idiom .w>span{ transform:translateY(110%); }
 .welcome{ position:relative; z-index:5; max-width:640px; margin:0 auto; padding:14px 24px 46px; text-align:center; }
 .welcome p{ color:var(--muted); font-size:16px; line-height:1.7; }
 .welcome .sig{ display:block; margin-top:14px; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--terra); font-weight:600; }
+
+/* Intro popup on the home page */
+.modal-overlay{
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgba(40, 28, 22, 0.55);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  opacity: 0; transition: opacity .35s ease;
+}
+.modal-overlay.show{ opacity: 1; }
+.modal-overlay[hidden]{ display: none; }
+.modal-card{
+  position: relative; max-width: 460px; width: 100%;
+  background: var(--cream); border-radius: 18px;
+  padding: 40px 32px 32px;
+  box-shadow: 0 24px 60px -12px rgba(60, 30, 10, 0.5);
+  transform: translateY(14px) scale(.98); transition: transform .35s ease;
+  text-align: center;
+}
+.modal-overlay.show .modal-card{ transform: translateY(0) scale(1); }
+.modal-scene{
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px; line-height: 1.5; color: var(--ink); margin-bottom: 18px;
+}
+.modal-point{ font-size: 15px; line-height: 1.7; color: var(--muted); margin-bottom: 26px; }
+.modal-enter{
+  background: var(--terra); color: #fff; border: none; border-radius: 10px;
+  padding: 11px 30px; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer;
+}
+.modal-enter:hover{ background: #B14A2C; }
+.modal-close{
+  position: absolute; top: 12px; right: 14px; width: 34px; height: 34px;
+  background: none; border: none; font-size: 26px; line-height: 1; color: var(--muted);
+  cursor: pointer; border-radius: 8px;
+}
+.modal-close:hover{ background: rgba(0,0,0,0.06); color: var(--ink); }
+.foot-link{ color: var(--terra); text-decoration: underline; cursor: pointer; }
