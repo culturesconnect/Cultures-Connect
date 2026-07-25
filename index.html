@@ -12,6 +12,16 @@
 </head>
 <body>
 <div class="grain"></div>
+
+<div class="modal-overlay" id="introModal" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="introClose" aria-label="Close">&times;</button>
+    <p class="modal-scene">Two students walk out of their final exam. &ldquo;That was a piece of cake,&rdquo; one says. &ldquo;Chocolate or vanilla?&rdquo; the other replies.</p>
+    <p class="modal-point" id="introTitle">It sounds like a simple mix up. But it&rsquo;s a small window into something bigger. Every culture is full of sayings that only make sense from the inside. Learning each other&rsquo;s is how we actually start to understand each other.</p>
+    <button class="modal-enter" id="introEnter">Enter</button>
+  </div>
+</div>
+
 <header class="nav" id="nav">
   <a class="brand" href="index.html">
     <span class="brand-mark"><img src="logo-mark.png" alt="Cultures Connect logo"></span>
@@ -46,7 +56,8 @@
   <p class="verify">Every saying is checked with at least two adult native speakers before it goes up. <a href="about.html">How we check</a></p>
 </section>
 <section class="welcome reveal">
-  <p>We believe our school is very multicultural and diverse. Students often mistake culture for difference. The cultures we all proudly carry should be something we connect through, rather than something we use to point out how different our food or languages are. This website shows you that connection. So welcome to Cultures Connect.
+  <p>I believe our school is very multicultural and diverse. Students often mistake culture for difference. The cultures we all proudly carry should be something we connect through, rather than something we use to point out how different our food or languages are. This website shows you that connection. So welcome to Cultures Connect.
+  <span class="sig">Kai, Mentor Group 910</span></p>
 </section>
 <section class="band">
   <div class="band-inner">
@@ -61,6 +72,7 @@
   <p>Made by Kai Ankhbayar, 910, Glenunga International High School.</p>
   <p>Supported by Ms Ankers, Mr Taylor and Mr Lau.</p>
   <p>Part of the Peacebuilding National Youth Design Challenge, run by Young Change Agents.</p>
+  <p><a href="#" id="introReplay" class="foot-link">Replay the intro</a></p>
 </footer><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
