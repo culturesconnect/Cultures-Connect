@@ -209,3 +209,42 @@ if(window.gsap && !reduce){
   if(band){ gsap.from(band,{ y:60,scale:.98,opacity:0,duration:1.05,ease:"power3.out", scrollTrigger:{ trigger:".band", start:"top 84%" } }); }
   gsap.from(".foot p",{ y:16,opacity:0,duration:.7,stagger:.08,ease:"power3.out", scrollTrigger:{ trigger:".foot", start:"top 94%" } });
 }
+
+/* ===== INTRO POPUP (home page only) ===== */
+(function(){
+  var modal = document.getElementById("introModal");
+  if(!modal) return;
+
+  var SEEN_KEY = "cc_intro_seen";
+  var closeBtn = document.getElementById("introClose");
+  var enterBtn = document.getElementById("introEnter");
+  var replay   = document.getElementById("introReplay");
+
+  function open(){
+    modal.hidden = false;
+    requestAnimationFrame(function(){ modal.classList.add("show"); });
+    document.body.style.overflow = "hidden";
+  }
+  function close(remember){
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+    if(remember){ try { window.localStorage.setItem(SEEN_KEY, "1"); } catch(e) {} }
+    setTimeout(function(){ modal.hidden = true; }, 350);
+  }
+
+  /* closing the intro always remembers, so it does not auto show again */
+  closeBtn.addEventListener("click", function(){ close(true); });
+  enterBtn.addEventListener("click", function(){ close(true); });
+  modal.addEventListener("click", function(e){ if(e.target === modal){ close(true); } });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && !modal.hidden){ close(true); } });
+
+  /* the footer link reopens it any time, on purpose */
+  if(replay){
+    replay.addEventListener("click", function(e){ e.preventDefault(); open(); });
+  }
+
+  /* auto show only on the first ever visit */
+  var seen;
+  try { seen = window.localStorage.getItem(SEEN_KEY); } catch(e) { seen = null; }
+  if(!seen){ open(); }
+})();
