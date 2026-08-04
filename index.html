@@ -34,12 +34,15 @@
   </ul>
 </header>
 <main class="hero">
-  <span class="eyebrow">This fortnight's C &middot; Critical thinking</span>
+  <span class="eyebrow" id="eyebrow">This fortnight's C &middot; Critical thinking</span>
   <h1 class="idiom" id="idiom">&ldquo;Think it through before you act&rdquo;</h1>
   <p class="sub">Same idea, many languages. Explore the idioms and see how every culture says the one thing that unites us.</p>
 </main>
+<div class="c-tabs" id="cTabs"></div>
+<p class="c-tabhint">Tap a past value to revisit it. Locked ones unlock as the term goes on.</p>
 <section class="carousel-section">
   <div class="carousel-title" id="value-name">Critical thinking</div>
+  <div class="carousel-slide" id="cSlide">
   <div class="carousel-container">
     <button class="nav-arrow left" aria-label="Previous">&#8249;</button>
     <div class="carousel-track" id="track"></div>
@@ -52,6 +55,7 @@
     <p class="mi-roman" id="mi-roman" style="display:none"></p>
   </div>
   <div class="dots" id="dots"></div>
+  </div>
   <p class="verify">Every saying is checked with at least two adult native speakers before it goes up. <a href="about.html">How we check</a></p>
 </section>
 <section class="welcome reveal">
@@ -72,7 +76,8 @@
   <p>Supported by Ms Ankers, Mr Taylor and Mr Lau.</p>
   <p>Part of the Peacebuilding National Youth Design Challenge, run by Young Change Agents.</p>
   <p><a href="#" id="introReplay" class="foot-link">Replay the intro</a></p>
-</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</footer>
+<div class="c-tip" id="cTip"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
 </body>
