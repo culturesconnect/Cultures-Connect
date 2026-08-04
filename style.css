@@ -239,3 +239,18 @@ body.is-animating .idiom .w>span{ transform:translateY(110%); }
 }
 .modal-close:hover{ background: rgba(0,0,0,0.06); color: var(--ink); }
 .foot-link{ color: var(--terra); text-decoration: underline; cursor: pointer; }
+
+/* Five C's tab switcher */
+.c-tabs{ display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:680px;margin:0 auto 4px;padding:0 16px;position:relative;z-index:5; }
+.c-tab{ display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:999px;font-size:13px;font-weight:600;font-family:inherit;border:1px solid transparent;cursor:pointer;line-height:1;transition:transform .15s ease, background .2s ease; }
+.c-tab.is-open{ background:#fff;border-color:#E4D8CB;color:#3A2E28; }
+.c-tab.is-open:hover{ transform:translateY(-1px); }
+.c-tab.is-now{ background:#C75C3C;color:#fff; }
+.c-tab.is-lock{ background:#F0E8DC;color:#A89C8C; }
+.c-tab.is-lock:hover{ background:#EAE0D2; }
+.c-tab.is-viewing{ box-shadow:0 0 0 2px #2E7D6F; }
+.c-tab .ti{ font-size:14px; }
+.c-tabhint{ text-align:center;font-size:12px;color:#A89C8C;margin:2px 0 20px;position:relative;z-index:5; }
+.c-tip{ position:fixed;z-index:60;background:#3A2E28;color:#FFF8F0;font-size:13px;line-height:1.45;padding:9px 13px;border-radius:10px;max-width:230px;text-align:center;pointer-events:none;opacity:0;transition:opacity .2s ease;box-shadow:0 10px 26px rgba(60,30,10,.4); }
+.c-tip.show{ opacity:1; }
+.c-tip::after{ content:"";position:absolute;top:100%;left:50%;margin-left:-6px;border:6px solid transparent;border-top-color:#3A2E28; }
