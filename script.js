@@ -19,17 +19,18 @@ const FLAGS = {
    square flag is cropped into the card.
    The 7th invitation card is added automatically below, so you never edit it. */
 const FORTNIGHT = {
-  value:"Collaboration",
-  idiom:"\u201CMany hands make light work\u201D",
+  value:"Critical thinking",
+  idiom:"\u201CThink it through before you act\u201D",
   cards:[
-    { lang:"French",   flag:"fr", phrase:"\u201CUnion makes strength\u201D",           gloss:"L'union fait la force" },
-    { lang:"Chinese",  flag:"cn", phrase:"\u201CWhen everyone gathers firewood, the flames rise high\u201D", gloss:"\u4F17\u4EBA\u62FE\u67F4\u706B\u7130\u9AD8" },
-    { lang:"Japanese", flag:"jp", phrase:"\u201CWhen three people gather, the wisdom of a sage appears\u201D", gloss:"\u4E09\u4EBA\u5BC4\u308C\u3070\u6587\u6B8A\u306E\u77E5\u6075" },
-    { lang:"Korean",   flag:"kr", phrase:"\u201CEven a sheet of paper is lighter when lifted together\u201D", gloss:"\uBC31\uC9C0\uC7A5\uB3C4 \uB9DE\uB4E4\uBA74 \uB0AB\uB2E4" },
-    { lang:"Hindi",    flag:"in", phrase:"\u201COne and one make eleven\u201D", gloss:"\u090F\u0915 \u0914\u0930 \u090F\u0915 \u0917\u094D\u092F\u093E\u0930\u0939" },
-    { lang:"Mongolian",flag:"mn", phrase:"\u201COne branch can't make a fire, one person can't make a family\u201D",
-      gloss:"\u0413\u0430\u043D\u0446 \u043C\u043E\u0434 \u0433\u0430\u043B \u0431\u043E\u043B\u043E\u0445\u0433\u04AF\u0439, \u0433\u0430\u043D\u0446 \u0445\u04AF\u043D \u0430\u0439\u043B \u0431\u043E\u043B\u043E\u0445\u0433\u04AF\u0439",
-      roman:"Gants mod gal bolokhgui, gants khun ail bolokhgui", objPos:"left center" }
+    { lang:"English",  flag:"gb", phrase:"\u201CLook before you leap\u201D", gloss:"Look before you leap" },
+    { lang:"French",   flag:"fr", phrase:"\u201CCaution is the mother of safety\u201D", gloss:"La prudence est m\u00E8re de s\u00FBret\u00E9" },
+    { lang:"Chinese",  flag:"cn", phrase:"\u201CThink three times, then act\u201D", gloss:"\u4E09\u601D\u800C\u540E\u884C", roman:"s\u0101n s\u012B \u00E9r h\u00F2u x\u00EDng" },
+    { lang:"Japanese", flag:"jp", phrase:"\u201CTap the stone bridge before you cross it\u201D", gloss:"\u77F3\u6A4B\u3092\u53E9\u3044\u3066\u6E21\u308B", roman:"ishibashi o tataite wataru" },
+    { lang:"Korean",   flag:"kr", phrase:"\u201CEven a stone bridge, tap it before you cross\u201D", gloss:"\uB3CC\uB2E4\uB9AC\uB3C4 \uB450\uB4E4\uACA8 \uBCF4\uACE0 \uAC74\uB108\uB77C", roman:"doldarido dudeulgyeo bogo geonneora" },
+    { lang:"Hindi",    flag:"in", phrase:"\u201CAct without thinking and you regret it later\u201D", gloss:"\u092C\u093F\u0928\u093E \u0935\u093F\u091A\u093E\u0930\u0947 \u091C\u094B \u0915\u0930\u0947 \u0938\u094B \u092A\u093E\u091B\u0947 \u092A\u091B\u0924\u093E\u090F", roman:"bina vichaare jo kare so paachhe pachhtaae" },
+    { lang:"Mongolian",flag:"mn", phrase:"\u201CMeasure seven times, cut once\u201D",
+      gloss:"\u0414\u043E\u043B\u043E\u043E \u0445\u044D\u043C\u0436\u0438\u0436, \u043D\u044D\u0433 \u043E\u0433\u0442\u043E\u043B",
+      roman:"Doloo khemjij, neg ogtol", objPos:"left center" }
   ]
 };
 /* nav scroll bg */
