@@ -56,6 +56,7 @@ body.is-animating .idiom .w>span{ transform:translateY(110%); }
 .carousel-title{ position:absolute; top:0; left:50%; transform:translateX(-50%); z-index:0; pointer-events:none; user-select:none;
   font-family:"Fraunces",Georgia,serif; font-style:italic; font-weight:600; font-size:clamp(58px,10vw,140px); line-height:1; white-space:nowrap; text-transform:lowercase;
   color:transparent; background:linear-gradient(to bottom, rgba(199,92,60,.20) 56%, rgba(199,92,60,0) 90%); -webkit-background-clip:text; background-clip:text; }
+.carousel-slide{ display:flex; flex-direction:column; align-items:center; width:100%; }
 .carousel-container{ width:80%; max-width:700px; height:280px; position:relative; perspective:400px; margin-top:6px; }
 .carousel-track{ width:100%; height:100%; display:flex; justify-content:center; align-items:center; position:relative; transform-style:preserve-3d; transition:transform .8s cubic-bezier(.25,.46,.45,.94);
   pointer-events:none; /* the track sits at z=0 and would otherwise swallow clicks aimed at the cards pushed back in 3D */ }
