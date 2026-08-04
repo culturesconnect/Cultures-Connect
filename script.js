@@ -22,7 +22,6 @@ const FORTNIGHT = {
   value:"Critical thinking",
   idiom:"\u201CThink it through before you act\u201D",
   cards:[
-    { lang:"English",  flag:"gb", phrase:"\u201CLook before you leap\u201D", gloss:"Look before you leap" },
     { lang:"French",   flag:"fr", phrase:"\u201CCaution is the mother of safety\u201D", gloss:"La prudence est m\u00E8re de s\u00FBret\u00E9" },
     { lang:"Chinese",  flag:"cn", phrase:"\u201CThink three times, then act\u201D", gloss:"\u4E09\u601D\u800C\u540E\u884C", roman:"s\u0101n s\u012B \u00E9r h\u00F2u x\u00EDng" },
     { lang:"Japanese", flag:"jp", phrase:"\u201CTap the stone bridge before you cross it\u201D", gloss:"\u77F3\u6A4B\u3092\u53E9\u3044\u3066\u6E21\u308B", roman:"ishibashi o tataite wataru" },
