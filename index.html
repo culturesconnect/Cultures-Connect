@@ -38,9 +38,31 @@
   </ul>
 </header>
 <main class="hero">
-  <div class="c-tabs" id="cTabs"></div>
-  <p class="c-tabhint">Tap a past value to revisit it. Locked ones unlock as the term goes on.</p>
-  <span class="eyebrow" id="eyebrow">This fortnight's C &middot; Critical thinking</span>
+  <!-- Five C's vertical reel. Replaces the old pill tabs.
+       #cTabs is kept in the DOM but hidden: script.js still builds it and its switchTo(),
+       and the reel drives the page by clicking the matching hidden tab. script.js is untouched. -->
+  <div class="c-reel-block">
+    <div class="c-reel-label">
+      <span class="lead">
+        <span class="c-reel-pulse"></span>
+        <span class="c-reel-prefix">This fortnight's C &middot;</span>
+      </span>
+      <span class="pickrow">
+        <span class="c-reel" id="cReel" aria-live="polite"><span class="c-reel-track" id="cReelTrack"></span></span>
+        <span class="c-halfnav">
+          <button class="c-half up" id="cUp" type="button" aria-label="Previous C">&#9650;</button>
+          <button class="c-half down" id="cDown" type="button" aria-label="Next C">&#9660;</button>
+        </span>
+      </span>
+    </div>
+    <div class="c-reel-notice-line"><span class="c-reel-notice" id="cReelNotice"></span></div>
+    <p class="c-reel-guide">Use the arrows to roll through the five C's. A new C unlocks every fortnight.</p>
+  </div>
+
+  <!-- kept for script.js, hidden from view -->
+  <div class="c-tabs" id="cTabs" style="display:none"></div>
+  <span class="eyebrow" id="eyebrow" style="display:none">This fortnight's C &middot; Critical thinking</span>
+
   <h1 class="idiom" id="idiom">&ldquo;Think it through before you act&rdquo;</h1>
   <p class="sub">Same idea, many languages. Explore the idioms and see how every culture says the one thing that unites us.</p>
 </main>
@@ -84,5 +106,123 @@
 <div class="c-tip" id="cTip"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
+
+<!-- Vertical C reel controller. Reads the hidden tabs script.js built, mirrors them as a
+     rolling reel, and clicks the matching hidden tab to switch the page. No edits to script.js. -->
+<script>
+(function cReel(){
+  var tabsWrap = document.getElementById("cTabs");
+  var reel     = document.getElementById("cReel");
+  var track    = document.getElementById("cReelTrack");
+  var notice   = document.getElementById("cReelNotice");
+  var upBtn     = document.getElementById("cUp");
+  var downBtn   = document.getElementById("cDown");
+  if(!tabsWrap || !reel || !track) return;
+
+  var btns = [].slice.call(tabsWrap.querySelectorAll(".c-tab"));
+  if(!btns.length) return;
+  var tip  = document.getElementById("cTip");
+
+  // read state straight from the tabs script.js built
+  var data = btns.map(function(b){
+    var weeks = null, al = b.getAttribute("aria-label") || "";
+    var m = al.match(/weeks?\s+(.+)$/i);
+    if(m) weeks = m[1];
+    return {
+      name:   b.textContent.trim(),
+      locked: b.classList.contains("is-lock"),
+      now:    b.classList.contains("is-now"),
+      weeks:  weeks,
+      btn:    b
+    };
+  });
+
+  var idx = data.findIndex(function(d){ return d.now; });
+  if(idx < 0) idx = 0;                                   // fall back to the first C
+  var lastIdx = 0;                                       // last reachable (unlocked) index
+  data.forEach(function(d,i){ if(!d.locked) lastIdx = i; });
+  var ITEM_H = 26;
+
+  // build the rolling words
+  data.forEach(function(d,i){
+    var el = document.createElement("span");
+    el.className = "c-reel-item" + (d.locked ? " locked" : "");
+    el.textContent = d.name;
+    el.addEventListener("click", function(){ d.locked ? denyLocked(i) : goTo(i); });
+    track.appendChild(el);
+  });
+  var items = [].slice.call(track.children);
+
+  // size the pill to the longest word so its width never jumps
+  (function sizeReel(){
+    var meas = document.createElement("span");
+    meas.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;" +
+      "font:700 12px/26px 'DM Sans',system-ui,-apple-system,sans-serif;" +
+      "letter-spacing:.2em;text-transform:uppercase;";
+    document.body.appendChild(meas);
+    var max = 0;
+    data.forEach(function(d){ meas.textContent = d.name; max = Math.max(max, meas.getBoundingClientRect().width); });
+    document.body.removeChild(meas);
+    reel.style.width = Math.ceil(max) + 34 + "px";       // 32px padding + 2px buffer
+  })();
+
+  function render(){
+    track.style.transform = "translateY(" + (-idx * ITEM_H) + "px)";
+    items.forEach(function(el,i){ el.classList.toggle("is-active", i === idx); });
+    notice.textContent = "";                             // locked C's are unreachable now
+    notice.className = "c-reel-notice";
+  }
+
+  // land on an unlocked C and hand off to script.js switchTo() via its hidden tab
+  function goTo(i){
+    idx = i; render();
+    if(!data[idx].locked){ data[idx].btn.click(); }
+  }
+
+  // blocked: red shake + a popup naming the locked C and when it opens
+  var tipT = null;
+  function denyLocked(i){
+    reel.classList.remove("shake"); void reel.offsetWidth; reel.classList.add("shake");
+    if(tip && i != null){
+      var d = data[i];
+      tip.textContent = d.weeks ? (d.name + " unlocks in Weeks " + d.weeks)
+                                : (d.name + " is still locked");
+      var r = reel.getBoundingClientRect();
+      tip.style.left = (r.left + r.width / 2) + "px";
+      tip.style.top  = (r.top - 10) + "px";
+      tip.style.transform = "translate(-50%,-100%)";
+      tip.classList.add("show");
+      clearTimeout(tipT);
+      tipT = setTimeout(function(){ tip.classList.remove("show"); }, 2600);
+    }
+  }
+  reel.addEventListener("animationend", function(){ reel.classList.remove("shake"); });
+
+  function next(){
+    if(idx < lastIdx)              goTo(idx + 1);        // still room among unlocked
+    else if(idx + 1 < data.length) denyLocked(idx + 1); // next one is locked
+    else                           goTo(0);             // no locked ahead: wrap to first
+  }
+  function prev(){
+    if(idx > 0) goTo(idx - 1);
+    else        goTo(lastIdx);                           // wrap up to the last unlocked
+  }
+
+  upBtn.addEventListener("click",   function(){ prev(); });
+  downBtn.addEventListener("click", function(){ next(); });
+
+  // scroll over the pill to roll (throttled so one notch = one step)
+  var wheelLock = false;
+  reel.addEventListener("wheel", function(e){
+    e.preventDefault();
+    if(wheelLock) return;
+    wheelLock = true;
+    (e.deltaY > 0 ? next : prev)();
+    setTimeout(function(){ wheelLock = false; }, 320);
+  }, { passive:false });
+
+  render();
+})();
+</script>
 </body>
 </html>
