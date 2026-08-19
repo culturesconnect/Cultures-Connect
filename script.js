@@ -8,7 +8,7 @@ const FLAGS = {
   cn: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1jbiIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxkZWZzPgogICAgPHBhdGggaWQ9ImNuLWEiIGZpbGw9IiNmZjAiIGQ9Ik0xLS4zLS43LjggMC0xIC42LjgtMS0uM3oiLz4KICA8L2RlZnM+CiAgPHBhdGggZmlsbD0iI2VlMWMyNSIgZD0iTTAgMGg1MTJ2NTEySDB6Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjY24tYSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjggMTI4KXNjYWxlKDc2LjgpIi8+CiAgPHVzZSB4bGluazpocmVmPSIjY24tYSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIxIDE0Mi42IC00NylzY2FsZSgyNS41ODI3KSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2NuLWEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTk4LjEgMTk4IC04MilzY2FsZSgyNS42KSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2NuLWEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTc0IDI3Mi40IC0xMTQpc2NhbGUoMjUuNjEzNykiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNjbi1hIiB3aWR0aD0iMzAiIGhlaWdodD0iMjAiIHRyYW5zZm9ybT0ibWF0cml4KDE2IC0xOS45NjggMTkuOTY4IDE2IDI1NiAyMzAuNCkiLz4KPC9zdmc+Cg==",
   jp: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJmbGFnLWljb25zLWpwIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImpwLWEiPgogICAgICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii43IiBkPSJNMTc3LjIgMGg3MDguNnY3MDguN0gxNzcuMnoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxnIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIxcHQiIGNsaXAtcGF0aD0idXJsKCNqcC1hKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyOClzY2FsZSguNzIyNDkpIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMTA2M3Y3MDguN0gweiIvPgogICAgPGNpcmNsZSBjeD0iNTIzLjEiIGN5PSIzNDQuMSIgcj0iMTk0LjkiIGZpbGw9IiNiYzAwMmQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01OS43IC0zNC41KXNjYWxlKDEuMTMwMikiLz4KICA8L2c+Cjwvc3ZnPgo=",
   kr: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1rciIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxwYXRoIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgMGg1MTJ2NTEySDBaIi8+CiAgPGcgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InJvdGF0ZSgtNTYuMyAzNjcuMiAtMTExLjIpc2NhbGUoOS4zNzUpIj4KICAgIDxnIGlkPSJrci1iIj4KICAgICAgPHBhdGggaWQ9ImtyLWEiIGZpbGw9IiMwMDAwMDEiIGQ9Ik0tNi0yNkg2djJILTZabTAgM0g2djJILTZabTAgM0g2djJILTZaIi8+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2tyLWEiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHk9IjQ0Ii8+CiAgICA8L2c+CiAgICA8cGF0aCBzdHJva2U9IiNmZmYiIGQ9Ik0wIDE3djEwIi8+CiAgICA8cGF0aCBmaWxsPSIjY2QyZTNhIiBkPSJNMC0xMmExMiAxMiAwIDAgMSAwIDI0WiIvPgogICAgPHBhdGggZmlsbD0iIzAwNDdhMCIgZD0iTTAtMTJhMTIgMTIgMCAwIDAgMCAyNEE2IDYgMCAwIDAgMCAwWiIvPgogICAgPGNpcmNsZSBjeT0iLTYiIHI9IjYiIGZpbGw9IiNjZDJlM2EiLz4KICA8L2c+CiAgPGcgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIzLjcgMTk2LjUgNTkuNSlzY2FsZSg5LjM3NSkiPgogICAgPHVzZSB4bGluazpocmVmPSIja3ItYiIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPgogICAgPHBhdGggc3Ryb2tlPSIjZmZmIiBkPSJNMC0yMy41djNNMCAxN3YzLjVtMCAzdjMiLz4KICA8L2c+Cjwvc3ZnPgo=",
-  in: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1pbiIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxwYXRoIGZpbGw9IiNmOTMiIGQ9Ik0wIDBoNTEydjE3MC43SDB6Ii8+CiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMTcwLjdoNTEydjE3MC42SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzEyODgwNyIgZD0iTTAgMzQxLjNoNTEyVjUxMkgweiIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1NiAyNTYpc2NhbGUoMy40MTMzMykiPgogICAgPGNpcmNsZSByPSIyMCIgZmlsbD0iIzAwOCIvPgogICAgPGNpcmNsZSByPSIxNy41IiBmaWxsPSIjZmZmIi8+CiAgICA8Y2lyY2xlIHI9IjMuNSIgZmlsbD0iIzAwOCIvPgogICAgPGcgaWQ9ImluLWQiPgogICAgICA8ZyBpZD0iaW4tYyI+CiAgICAgICAgPGcgaWQ9ImluLWIiPgogICAgICAgICAgPGcgaWQ9ImluLWEiIGZpbGw9IiMwMDgiPgogICAgICAgICAgICA8Y2lyY2xlIHI9Ii45IiB0cmFuc2Zvcm09InJvdGF0ZSg3LjUgLTguOCAxMzMuNSkiLz4KICAgICAgICAgICAgPHBhdGggZD0iTTAgMTcuNS42IDcgMCAybC0uNiA1eiIvPgogICAgICAgICAgPC9nPgogICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjaW4tYSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoMTUpIi8+CiAgICAgICAgPC9nPgogICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2luLWIiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDMwKSIvPgogICAgICA8L2c+CiAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2luLWMiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPC9nPgogICAgPHVzZSB4bGluazpocmVmPSIjaW4tZCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwKSIvPgogICAgPHVzZSB4bGluazpocmVmPSIjaW4tZCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCkiLz4KICA8L2c+Cjwvc3ZnPgo=",
+  in: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1pbiIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxwYXRoIGZpbGw9IiNmOTMiIGQ9Ik0wIDBoNTEydjE3MC43SDB6Ii8+CiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMTcwLjdoNTEydjE3MC42SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzEyODgwNyIgZD0iTTAgMzQxLjNoNTEyVjUxMkgweiIvPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI1NiAyNTYpc2NhbGUoMy40MTMzMykiPgogICAgPGNpcmNsZSByPSIyMCIgZmlsbD0iIzAwOCIvPgogICAgPGNpcmNsZSByPSIxNy41IiBmaWxsPSIjZmZmIi8+CiAgICA8Y2lyY2xlIHI9IjMuNSIgZmlsbD0iIzAwOCIvPgogICAgPGcgaWQ9ImluLWQiPgogICAgICA8ZyBpZD0iaW4tYyI+CiAgICAgICAgPGcgaWQ9ImluLWIiPgogICAgICAgICAgPGcgaWQ9ImluLWEiIGZpbGw9IiMwMDgiPgogICAgICAgICAgICA8Y2lyY2xlIHI9Ii45IiB0cmFuc2Zvcm09InJvdGF0ZSg3LjUgLTguOCAxMzMuNSkiLz4KICAgICAgICAgICAgPHBhdGggZD0iTTAgMTcuNS42IDcgMCAyLS42IDV6Ii8+CiAgICAgICAgICA8L2c+CiAgICAgICAgICA8dXNlIHhsaW5rOmhyZWY9IiNpbi1hIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InJvdGF0ZSgxNSkiLz4KICAgICAgICA8L2c+CiAgICAgICAgPHVzZSB4bGluazpocmVmPSIjaW4tYiIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoMzApIi8+CiAgICAgIDwvZz4KICAgICAgPHVzZSB4bGluazpocmVmPSIjaW4tYyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoNjApIi8+CiAgICA8L2c+CiAgICA8dXNlIHhsaW5rOmhyZWY9IiNpbi1kIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgICA8dXNlIHhsaW5rOmhyZWY9IiNpbi1kIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIwKSIvPgogIDwvZz4KPC9zdmc+Cg==",
   mn: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmQ5MDAiIGlkPSJmbGFnLWljb25zLW1uIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPHBhdGggZmlsbD0iI2RhMjAzMiIgZD0iTTAgMGg1MTJ2NTEySDBaIi8+CiAgPHBhdGggZmlsbD0iIzAwNjZiMyIgZD0iTTE3MC43IDBoMTcwLjZ2NTEySDE3MC43WiIvPgogIDxjaXJjbGUgY3g9Ijg1LjMiIGN5PSIxOTYuNiIgcj0iMzUiLz4KICA8Y2lyY2xlIGN4PSI4NS4zIiBjeT0iMTgwLjciIHI9IjM4LjIiIGZpbGw9IiNkYTIwMzIiLz4KICA8Y2lyY2xlIGN4PSI4NS4zIiBjeT0iMTg3IiByPSIyNS41Ii8+CiAgPHBhdGggZD0iTTg4IDEwNC4zYTggOCAwIDAgMC00LjYgNi42Yy0uMiAyLjIuOCA0LjYuOSA2LjcgMCAzLjctMy44IDQuOS0zLjggMTAuMSAwIDEuOCAxLjcgMy44IDEuNyA4LjQtLjMgMi41LTEuNyAzLTMuMiAzLjJhMyAzIDAgMCAxLTMuMi0zLjIgMyAzIDAgMCAxIC45LTIuMmwuMy0uM2MuNy0uNyAxLjctMSAxLjctMyAwLTEtLjYtMS44LTEuMi0zLjZhNyA3IDAgMCAxIDEuMi02LjJjLTIuMi44LTMuNiAzLTQuMyA0LjktLjcgMi4zLS4xIDMuNy0xLjEgNS43LS42IDEuMi0xLjQgMS43LTIgMi44LS45IDEuMi0xLjggMy44LTEuOCA1LjFhMTYgMTYgMCAwIDAgMzEuOCAwYzAtMS4zLTEtNC0xLjgtNS4xLS43LTEtMS41LTEuNi0yLTIuOC0xLTItLjQtMy40LTEuMi01LjctLjctMi0yLTQtNC4zLTVhNyA3IDAgMCAxIDEuMyA2LjNjLS43IDEuOC0xLjMgMi43LTEuMyAzLjcgMCAxLjkgMSAyLjIgMS43IDNsLjMuMmEzIDMgMCAwIDEgMSAyLjIgMyAzIDAgMCAxLTMuMyAzLjJxLTIuNy0uMS0zLjItMy4yYzAtNi4xIDIuNy02LjUgMi43LTExIDAtNi41LTUuOC05LjYtNS44LTE0LjMgMC0xLjYuMy00LjMgMi42LTYuNU0xNS4zIDIzNy45aDMxLjl2MTUyLjhIMTUuM1ptMTA4LjIgMGgzMS44djE1Mi44aC0zMS44em0tNzAgMGg2My43TDg1LjMgMjU3Wm0wIDI1LjVoNjMuN1YyNzZINTMuNVptMCA4OWg2My43djEyLjhINTMuNVptMCAxOS4yaDYzLjdsLTMxLjkgMTlaIi8+CiAgPGNpcmNsZSBjeD0iODUuMyIgY3k9IjMxNC4zIiByPSIzMS44Ii8+CiAgPGcgZmlsbD0iI2RhMjAzMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyIDY2LjEpc2NhbGUoLjYzNjM2KSI+CiAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIzNjMuNSIgcj0iMTAiLz4KICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjQxNi41IiByPSIxMCIvPgogICAgPHBhdGggZD0iTTIwMCAzMzRhMjkuNSAyOS41IDAgMCAxIDAgNTkgMjMuNSAyMy41IDAgMCAwIDAgNDd2NmEyOS41IDI5LjUgMCAwIDEgMC01OSAyMy41IDIzLjUgMCAwIDAgMC00N3oiLz4KICA8L2c+Cjwvc3ZnPgo=",
 };
 /* ===== EDIT EACH FORTNIGHT HERE =====
@@ -21,37 +21,50 @@ const FLAGS = {
 const TERM = [
   {
     value:"Collaboration", weeks:"1 to 2",
-    idiom:"\u201CMany hands make light work\u201D",
+    idiom:"“Many hands make light work”",
     cards:[
-      { lang:"French",   flag:"fr", phrase:"\u201CUnion makes strength\u201D", gloss:"L'union fait la force" },
-      { lang:"Chinese",  flag:"cn", phrase:"\u201CWhen everyone gathers firewood, the flames rise high\u201D", gloss:"\u4F17\u4EBA\u62FE\u67F4\u706B\u7130\u9AD8" },
-      { lang:"Japanese", flag:"jp", phrase:"\u201CWhen three people gather, the wisdom of a sage appears\u201D", gloss:"\u4E09\u4EBA\u5BC4\u308C\u3070\u6587\u6B8A\u306E\u77E5\u6075" },
-      { lang:"Korean",   flag:"kr", phrase:"\u201CEven a sheet of paper is lighter when lifted together\u201D", gloss:"\uBC31\uC9C0\uC7A5\uB3C4 \uB9DE\uB4E4\uBA74 \uB0AB\uB2E4" },
-      { lang:"Hindi",    flag:"in", phrase:"\u201COne and one make eleven\u201D", gloss:"\u090F\u0915 \u0914\u0930 \u090F\u0915 \u0917\u094D\u092F\u093E\u0930\u0939" },
-      { lang:"Mongolian",flag:"mn", phrase:"\u201COne branch can't make a fire, one person can't make a family\u201D",
-        gloss:"\u0413\u0430\u043D\u0446 \u043C\u043E\u0434 \u0433\u0430\u043B \u0431\u043E\u043B\u043E\u0445\u0433\u04AF\u0439, \u0433\u0430\u043D\u0446 \u0445\u04AF\u043D \u0430\u0439\u043B \u0431\u043E\u043B\u043E\u0445\u0433\u04AF\u0439",
+      { lang:"French",   flag:"fr", phrase:"“Union makes strength”", gloss:"L'union fait la force" },
+      { lang:"Chinese",  flag:"cn", phrase:"“When everyone gathers firewood, the flames rise high”", gloss:"众人拾柴火焰高" },
+      { lang:"Japanese", flag:"jp", phrase:"“When three people gather, the wisdom of a sage appears”", gloss:"三人寄れば文殊の知恵" },
+      { lang:"Korean",   flag:"kr", phrase:"“Even a sheet of paper is lighter when lifted together”", gloss:"백지장도 맞들면 낫다" },
+      { lang:"Hindi",    flag:"in", phrase:"“One and one make eleven”", gloss:"एक और एक ग्यारह" },
+      { lang:"Mongolian",flag:"mn", phrase:"“One branch can't make a fire, one person can't make a family”",
+        gloss:"Ганц мод гал болохгүй, ганц хүн айл болохгүй",
         roman:"Gants mod gal bolokhgui, gants khun ail bolokhgui", objPos:"left center" }
     ]
   },
   {
     value:"Critical thinking", weeks:"3 to 4",
-    idiom:"\u201CThink it through before you act\u201D",
+    idiom:"“Think it through before you act”",
     cards:[
-      { lang:"French",   flag:"fr", phrase:"\u201CCaution is the mother of safety\u201D", gloss:"La prudence est m\u00E8re de s\u00FBret\u00E9" },
-      { lang:"Chinese",  flag:"cn", phrase:"\u201CThink three times, then act\u201D", gloss:"\u4E09\u601D\u800C\u540E\u884C", roman:"s\u0101n s\u012B \u00E9r h\u00F2u x\u00EDng" },
-      { lang:"Japanese", flag:"jp", phrase:"\u201CTap the stone bridge before you cross it\u201D", gloss:"\u77F3\u6A4B\u3092\u53E9\u3044\u3066\u6E21\u308B", roman:"ishibashi o tataite wataru" },
-      { lang:"Korean",   flag:"kr", phrase:"\u201CEven a stone bridge, tap it before you cross\u201D", gloss:"\uB3CC\uB2E4\uB9AC\uB3C4 \uB450\uB4E4\uACA8 \uBCF4\uACE0 \uAC74\uB108\uB77C", roman:"doldarido dudeulgyeo bogo geonneora" },
-      { lang:"Hindi",    flag:"in", phrase:"\u201CAct without thinking and you regret it later\u201D", gloss:"\u092C\u093F\u0928\u093E \u0935\u093F\u091A\u093E\u0930\u0947 \u091C\u094B \u0915\u0930\u0947 \u0938\u094B \u092A\u093E\u091B\u0947 \u092A\u091B\u0924\u093E\u090F", roman:"bina vichaare jo kare so paachhe pachhtaae" },
-      { lang:"Mongolian",flag:"mn", phrase:"\u201CMeasure seven times, cut once\u201D",
-        gloss:"\u0414\u043E\u043B\u043E\u043E \u0445\u044D\u043C\u0436\u0438\u0436, \u043D\u044D\u0433 \u043E\u0433\u0442\u043E\u043B",
+      { lang:"French",   flag:"fr", phrase:"“Caution is the mother of safety”", gloss:"La prudence est mère de sûreté" },
+      { lang:"Chinese",  flag:"cn", phrase:"“Think three times, then act”", gloss:"三思而后行", roman:"sān sī ér hòu xíng" },
+      { lang:"Japanese", flag:"jp", phrase:"“Tap the stone bridge before you cross it”", gloss:"石橋を叩いて渡る", roman:"ishibashi o tataite wataru" },
+      { lang:"Korean",   flag:"kr", phrase:"“Even a stone bridge, tap it before you cross”", gloss:"돌다리도 두들겨 보고 건너라", roman:"doldarido dudeulgyeo bogo geonneora" },
+      { lang:"Hindi",    flag:"in", phrase:"“Act without thinking and you regret it later”", gloss:"बिना विचारे जो करे सो पाछे पछताए", roman:"bina vichaare jo kare so paachhe pachhtaae" },
+      { lang:"Mongolian",flag:"mn", phrase:"“Measure seven times, cut once”",
+        gloss:"Долоо хэмжиж, нэг огтол",
         roman:"Doloo khemjij, neg ogtol", objPos:"left center" }
     ]
   },
-  { value:"Creativity",    weeks:"5 to 6",  idiom:null, cards:null },
+  {
+    value:"Creativity", weeks:"5 to 6",
+    idiom:"“Necessity is the mother of invention”",
+    cards:[
+      { lang:"French",   flag:"fr", phrase:"“For want of thrushes, you eat blackbirds”", gloss:"Faute de grives, on mange des merles" },
+      { lang:"Chinese",  flag:"cn", phrase:"“When stuck, change; change opens a way”", gloss:"穷则变，变则通", roman:"qióng zé biàn, biàn zé tōng" },
+      { lang:"Japanese", flag:"jp", phrase:"“Pushed to the limit, a way opens”", gloss:"窮すれば通ず", roman:"kyū sureba tsūzu" },
+      { lang:"Korean",   flag:"kr", phrase:"“When desperate, a way opens”", gloss:"궁하면 통한다", roman:"gunghamyeon tonghanda" },
+      { lang:"Hindi",    flag:"in", phrase:"“Necessity is the mother of invention”", gloss:"आवश्यकता ही आविष्कार की जननी है", roman:"aavashyakta hi aavishkaar ki janani hai" },
+      { lang:"Mongolian",flag:"mn", phrase:"“There is no such thing as no way out; find the method and the road appears”",
+        gloss:"Гарцгүй гэж үгүй, аргыг нь олвол зам нь олдоно",
+        roman:"Gartsgüi gej ügüi, argyg ni olvol zam ni oldono", objPos:"left center" }
+    ]
+  },
   { value:"Communication", weeks:"7 to 8",  idiom:null, cards:null },
   { value:"Citizenship",   weeks:"9 to 10", idiom:null, cards:null }
 ];
-const CURRENT = 1;
+const CURRENT = 2;
 /* nav scroll bg */
 var nav = document.getElementById("nav");
 if(nav){ addEventListener("scroll", function(){ nav.classList.toggle("scrolled", scrollY>20); }, {passive:true}); }
@@ -173,8 +186,8 @@ if(nav){ addEventListener("scroll", function(){ nav.classList.toggle("scrolled",
       idiomEl.querySelectorAll(".w>span").forEach(function(s){ s.style.transform="none"; });
     }
     if(eyebrowEl) eyebrowEl.textContent = (fnIndex===CURRENT)
-      ? "This fortnight's C \u00B7 "+fn.value
-      : "Weeks "+fn.weeks+" \u00B7 "+fn.value;
+      ? "This fortnight's C · "+fn.value
+      : "Weeks "+fn.weeks+" · "+fn.value;
 
     markTabs();
   }
