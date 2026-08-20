@@ -21,9 +21,30 @@
 <style>
   .carousel-slide{ display:flex; flex-direction:column; align-items:center; width:100%; }
   .carousel-container{ margin-left:auto; margin-right:auto; }
+  .sv-overlay{ position:fixed; inset:0; z-index:150; display:flex; align-items:center; justify-content:center; padding:22px; background:rgba(40,28,22,.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); opacity:0; transition:opacity .3s ease; }
+  .sv-overlay.show{ opacity:1; }
+  .sv-overlay[hidden]{ display:none; }
+  .sv-card{ max-width:400px; width:100%; background:var(--cream); border-radius:16px; padding:30px 28px 26px; text-align:center; box-shadow:0 24px 60px -12px rgba(60,30,10,.5); transform:translateY(12px); transition:transform .3s ease; }
+  .sv-overlay.show .sv-card{ transform:translateY(0); }
+  .sv-title{ font-family:Georgia,"Times New Roman",serif; font-size:21px; color:var(--ink); margin-bottom:8px; }
+  .sv-text{ font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px; }
+  .sv-btns{ display:flex; gap:10px; justify-content:center; }
+  .sv-btn{ border:none; border-radius:10px; padding:11px 22px; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer; }
+  .sv-yes{ background:var(--teal); color:#fff; } .sv-yes:hover{ background:#256355; }
+  .sv-no{ background:var(--terra); color:#fff; } .sv-no:hover{ background:#B14A2C; }
 </style>
 </head>
 <body>
+<div class="sv-overlay" id="svModal" role="dialog" aria-modal="true" aria-labelledby="svTitle" hidden>
+  <div class="sv-card" id="svCard">
+    <div class="sv-title" id="svTitle">Quick question</div>
+    <p class="sv-text">Have you filled in the Cultures Connect survey yet? It only takes a couple of minutes and it really helps.</p>
+    <div class="sv-btns">
+      <button class="sv-btn sv-yes" id="svYes">Yes, I have</button>
+      <button class="sv-btn sv-no" id="svNo">Not yet</button>
+    </div>
+  </div>
+</div>
 <div class="grain"></div>
 
 <div class="modal-overlay" id="introModal" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
@@ -66,7 +87,7 @@
       </span>
     </div>
     <div class="c-reel-notice-line"><span class="c-reel-notice" id="cReelNotice"></span></div>
-    <p class="c-reel-guide">Use the arrows to roll through the five C's. A new C unlocks every fortnight.</p>
+    <p class="c-reel-guide">Use the arrows to roll through the five C's, one for each of our school values.</p>
   </div>
 
   <!-- kept for script.js, hidden from view -->
@@ -232,6 +253,37 @@
   }, { passive:false });
 
   render();
+})();
+</script>
+<script>
+/* Survey prompt: shows once per device, 15 seconds after the page loads. */
+(function(){
+  var FORM = "https://forms.gle/LAf6DGw7UE8hu4jCA";
+  var KEY = "cc_survey_asked";
+  var modal = document.getElementById("svModal");
+  if(!modal) return;
+  var seen; try { seen = localStorage.getItem(KEY); } catch(e) { seen = null; }
+  if(seen) return;
+
+  function remember(){ try { localStorage.setItem(KEY, "1"); } catch(e) {} }
+  function show(){ modal.hidden=false; requestAnimationFrame(function(){ modal.classList.add("show"); }); }
+  function close(){ modal.classList.remove("show"); setTimeout(function(){ modal.hidden=true; }, 300); }
+
+  document.getElementById("svYes").addEventListener("click", function(){
+    remember();
+    document.getElementById("svCard").innerHTML =
+      '<div class="sv-title">Thank you!</div><p class="sv-text" style="margin-bottom:0;">Welcome back — enjoy exploring Cultures Connect.</p>';
+    setTimeout(close, 1800);
+  });
+  document.getElementById("svNo").addEventListener("click", function(){
+    remember();
+    window.open(FORM, "_blank", "noopener");
+    close();
+  });
+  modal.addEventListener("click", function(e){ if(e.target===modal){ remember(); close(); } });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !modal.hidden){ remember(); close(); } });
+
+  setTimeout(show, 15000);
 })();
 </script>
 </body>
