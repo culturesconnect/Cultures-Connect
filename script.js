@@ -228,7 +228,7 @@ if(nav){ addEventListener("scroll", function(){ nav.classList.toggle("scrolled",
     TERM.forEach(function(fn,i){
       var b=document.createElement("button");
       b.type="button"; b.className="c-tab";
-      var locked = i>CURRENT;
+      var locked = false;  // all five C's unlocked
       if(i===CURRENT) b.classList.add("is-now");
       else if(locked) b.classList.add("is-lock");
       else b.classList.add("is-open");
