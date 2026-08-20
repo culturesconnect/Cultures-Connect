@@ -61,8 +61,34 @@ const TERM = [
         roman:"Gartsgüi gej ügüi, argyg ni olvol zam ni oldono", objPos:"left center" }
     ]
   },
-  { value:"Communication", weeks:"7 to 8",  idiom:null, cards:null },
-  { value:"Citizenship",   weeks:"9 to 10", idiom:null, cards:null }
+  {
+    value:"Communication", weeks:"7 to 8",
+    idiom:"“A kind word goes a long way”",
+    cards:[
+      { lang:"French",   flag:"fr", phrase:"“Gentleness achieves more than force”", gloss:"Plus fait douceur que violence" },
+      { lang:"Chinese",  flag:"cn", phrase:"“One kind word warms three winters”", gloss:"良言一句三冬暖", roman:"liángyán yī jù sān dōng nuǎn" },
+      { lang:"Japanese", flag:"jp", phrase:"“A gentle face and kind words”", gloss:"和顔愛語", roman:"wagen aigo" },
+      { lang:"Korean",   flag:"kr", phrase:"“Kind words going out bring kind words back”", gloss:"가는 말이 고와야 오는 말이 곱다", roman:"ganeun mari gowaya oneun mari gopda" },
+      { lang:"Hindi",    flag:"in", phrase:"“Sweet speech is dear to everyone”", gloss:"मीठी बोली सबको प्यारी लगती है", roman:"meethi boli sabko pyaari lagti hai" },
+      { lang:"Mongolian",flag:"mn", phrase:"“A blessing of the mouth is a blessing forever”",
+        gloss:"Амны билгээс ашдын билэг",
+        roman:"Amny bilgees ashdyn bileg", objPos:"left center" }
+    ]
+  },
+  {
+    value:"Citizenship", weeks:"9 to 10",
+    idiom:"“It takes a village to raise a child”",
+    cards:[
+      { lang:"French",   flag:"fr", phrase:"“One for all, all for one”", gloss:"Un pour tous, tous pour un" },
+      { lang:"Chinese",  flag:"cn", phrase:"“Every ordinary person shares responsibility for all”", gloss:"天下兴亡，匹夫有责", roman:"tiānxià xīngwáng, pǐfū yǒu zé" },
+      { lang:"Japanese", flag:"jp", phrase:"“Kindness to others is never wasted, it comes back to you”", gloss:"情けは人の為ならず", roman:"nasake wa hito no tame narazu" },
+      { lang:"Korean",   flag:"kr", phrase:"“A close neighbour beats a distant relative”", gloss:"이웃이 사촌보다 낫다", roman:"iusi sachonboda natda" },
+      { lang:"Hindi",    flag:"in", phrase:"“The whole world is one family”", gloss:"वसुधैव कुटुम्बकम्", roman:"vasudhaiva kutumbakam" },
+      { lang:"Mongolian",flag:"mn", phrase:"“A near neighbour is better than a distant relative”",
+        gloss:"Ойрын хөрш холын садангаас дээр",
+        roman:"Oiryn khörsh kholyn sadangaas deer", objPos:"left center" }
+    ]
+  }
 ];
 const CURRENT = 2;
 /* nav scroll bg */
