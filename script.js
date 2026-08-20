@@ -316,41 +316,79 @@ if(window.gsap && !reduce){
   gsap.from(".foot p",{ y:16,opacity:0,duration:.7,stagger:.08,ease:"power3.out", scrollTrigger:{ trigger:".foot", start:"top 94%" } });
 }
 
-/* ===== INTRO POPUP (home page only) ===== */
+/* ===== POPUPS (intro + survey), injected so they appear on every page ===== */
 (function(){
-  var modal = document.getElementById("introModal");
-  if(!modal) return;
-
-  var SEEN_KEY = "cc_intro_seen";
-  var closeBtn = document.getElementById("introClose");
-  var enterBtn = document.getElementById("introEnter");
-  var replay   = document.getElementById("introReplay");
-
-  function open(){
-    modal.hidden = false;
-    requestAnimationFrame(function(){ modal.classList.add("show"); });
-    document.body.style.overflow = "hidden";
+  if(!document.getElementById("introModal")){
+    var im=document.createElement("div");
+    im.className="modal-overlay"; im.id="introModal";
+    im.setAttribute("role","dialog"); im.setAttribute("aria-modal","true"); im.setAttribute("aria-labelledby","introTitle");
+    im.hidden=true;
+    im.innerHTML='<div class="modal-card">'
+      +'<button class="modal-close" id="introClose" aria-label="Close">&times;</button>'
+      +'<p class="modal-scene">Two students walk out of their final exam. &ldquo;That was a piece of cake,&rdquo; one says. &ldquo;Chocolate or vanilla?&rdquo; the other replies.</p>'
+      +'<p class="modal-point" id="introTitle">It sounds like a simple mix up. But it&rsquo;s a small window into something bigger. Every culture is full of sayings that only make sense from the inside. Learning each other&rsquo;s is how we actually start to understand each other.</p>'
+      +'<button class="modal-enter" id="introEnter">Enter</button>'
+      +'</div>';
+    document.body.appendChild(im);
   }
-  function close(remember){
-    modal.classList.remove("show");
-    document.body.style.overflow = "";
-    if(remember){ try { window.localStorage.setItem(SEEN_KEY, "1"); } catch(e) {} }
-    setTimeout(function(){ modal.hidden = true; }, 350);
-  }
-
-  /* closing the intro always remembers, so it does not auto show again */
-  closeBtn.addEventListener("click", function(){ close(true); });
-  enterBtn.addEventListener("click", function(){ close(true); });
-  modal.addEventListener("click", function(e){ if(e.target === modal){ close(true); } });
-  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && !modal.hidden){ close(true); } });
-
-  /* the footer link reopens it any time, on purpose */
-  if(replay){
-    replay.addEventListener("click", function(e){ e.preventDefault(); open(); });
+  if(!document.getElementById("svModal")){
+    var sm=document.createElement("div");
+    sm.className="sv-overlay"; sm.id="svModal";
+    sm.setAttribute("role","dialog"); sm.setAttribute("aria-modal","true"); sm.setAttribute("aria-labelledby","svTitle");
+    sm.hidden=true;
+    sm.innerHTML='<div class="sv-card" id="svCard">'
+      +'<div class="sv-title" id="svTitle">Quick question</div>'
+      +'<p class="sv-text">Have you filled in the Cultures Connect survey yet? It only takes a couple of minutes and it really helps.</p>'
+      +'<div class="sv-btns"><button class="sv-btn sv-yes" id="svYes">Yes, I have</button>'
+      +'<button class="sv-btn sv-no" id="svNo">Not yet</button></div>'
+      +'</div>';
+    document.body.appendChild(sm);
   }
 
-  /* auto show only on the first ever visit */
-  var seen;
-  try { seen = window.localStorage.getItem(SEEN_KEY); } catch(e) { seen = null; }
-  if(!seen){ open(); }
+  /* intro */
+  (function(){
+    var modal=document.getElementById("introModal"); if(!modal) return;
+    var SEEN="cc_intro_seen";
+    function open(){ modal.hidden=false; requestAnimationFrame(function(){ modal.classList.add("show"); }); document.body.style.overflow="hidden"; }
+    function close(r){ modal.classList.remove("show"); document.body.style.overflow=""; if(r){ try{ localStorage.setItem(SEEN,"1"); }catch(e){} } setTimeout(function(){ modal.hidden=true; },350); }
+    document.getElementById("introClose").addEventListener("click",function(){ close(true); });
+    document.getElementById("introEnter").addEventListener("click",function(){ close(true); });
+    modal.addEventListener("click",function(e){ if(e.target===modal) close(true); });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape" && !modal.hidden) close(true); });
+    Array.prototype.forEach.call(document.querySelectorAll("#introReplay, .js-replay-intro"),function(l){
+      l.addEventListener("click",function(e){ e.preventDefault(); open(); });
+    });
+    var seen; try{ seen=localStorage.getItem(SEEN); }catch(e){ seen=null; }
+    if(!seen) open();
+  })();
+
+  /* survey */
+  (function(){
+    var FORM="https://forms.gle/LAf6DGw7UE8hu4jCA";
+    var KEY="cc_survey_asked";
+    var modal=document.getElementById("svModal"); if(!modal) return;
+    var card=document.getElementById("svCard");
+    var QUESTION=card.innerHTML;
+    function remember(){ try{ localStorage.setItem(KEY,"1"); }catch(e){} }
+    function bind(){
+      document.getElementById("svYes").addEventListener("click",function(){
+        remember();
+        card.innerHTML='<div class="sv-title">Thank you!</div><p class="sv-text" style="margin-bottom:0;">Welcome back — enjoy exploring Cultures Connect.</p>';
+        setTimeout(function(){ close(); },1800);
+      });
+      document.getElementById("svNo").addEventListener("click",function(){
+        remember(); window.open(FORM,"_blank","noopener"); close();
+      });
+    }
+    function open(){ card.innerHTML=QUESTION; bind(); modal.hidden=false; requestAnimationFrame(function(){ modal.classList.add("show"); }); }
+    function close(){ modal.classList.remove("show"); setTimeout(function(){ modal.hidden=true; },300); }
+    bind();
+    modal.addEventListener("click",function(e){ if(e.target===modal){ remember(); close(); } });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape" && !modal.hidden){ remember(); close(); } });
+    Array.prototype.forEach.call(document.querySelectorAll("#svReopen, .js-open-survey"),function(l){
+      l.addEventListener("click",function(e){ e.preventDefault(); open(); });
+    });
+    var seen; try{ seen=localStorage.getItem(KEY); }catch(e){ seen=null; }
+    if(!seen){ setTimeout(open, 10000); }
+  })();
 })();
