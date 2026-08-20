@@ -297,3 +297,17 @@ body.is-animating .idiom .w>span{ transform:translateY(110%); }
   .c-reel-label{ flex-direction:column; gap:12px; }
   .pickrow{ justify-content:center; }
 }
+
+
+/* Survey prompt popup (shown on every page) */
+.sv-overlay{ position:fixed; inset:0; z-index:150; display:flex; align-items:center; justify-content:center; padding:22px; background:rgba(40,28,22,.55); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); opacity:0; transition:opacity .3s ease; }
+.sv-overlay.show{ opacity:1; }
+.sv-overlay[hidden]{ display:none; }
+.sv-card{ max-width:400px; width:100%; background:var(--cream); border-radius:16px; padding:30px 28px 26px; text-align:center; box-shadow:0 24px 60px -12px rgba(60,30,10,.5); transform:translateY(12px); transition:transform .3s ease; }
+.sv-overlay.show .sv-card{ transform:translateY(0); }
+.sv-title{ font-family:Georgia,"Times New Roman",serif; font-size:21px; color:var(--ink); margin-bottom:8px; }
+.sv-text{ font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px; }
+.sv-btns{ display:flex; gap:10px; justify-content:center; }
+.sv-btn{ border:none; border-radius:10px; padding:11px 22px; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer; }
+.sv-yes{ background:var(--teal); color:#fff; } .sv-yes:hover{ background:#256355; }
+.sv-no{ background:var(--terra); color:#fff; } .sv-no:hover{ background:#B14A2C; }
