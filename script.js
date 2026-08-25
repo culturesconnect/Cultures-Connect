@@ -4,6 +4,7 @@
 
 /* Flag data URIs (square SVGs, lipis/flag-icons, public domain). Bundled so the site has no external image dependency, which matters on locked-down school networks. */
 const FLAGS = {
+  ie: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJmbGFnLWljb25zLWllIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGg1MTJ2NTEySDB6Ii8+PHBhdGggZmlsbD0iIzE2OWI2MiIgZD0iTTAgMGgxNzAuN3Y1MTJIMHoiLz48cGF0aCBmaWxsPSIjZmY4ODNlIiBkPSJNMzQxLjMgMEg1MTJ2NTEySDM0MS4zeiIvPjwvc3ZnPg==",
   fr: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJmbGFnLWljb25zLWZyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGg1MTJ2NTEySDB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMDA5MSIgZD0iTTAgMGgxNzAuN3Y1MTJIMHoiLz4KICA8cGF0aCBmaWxsPSIjZTEwMDBmIiBkPSJNMzQxLjMgMEg1MTJ2NTEySDM0MS4zeiIvPgo8L3N2Zz4K",
   cn: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBpZD0iZmxhZy1pY29ucy1jbiIgdmlld0JveD0iMCAwIDUxMiA1MTIiPgogIDxkZWZzPgogICAgPHBhdGggaWQ9ImNuLWEiIGZpbGw9IiNmZjAiIGQ9Ik0xLS4zLS43LjggMC0xIC42LjgtMS0uM3oiLz4KICA8L2RlZnM+CiAgPHBhdGggZmlsbD0iI2VlMWMyNSIgZD0iTTAgMGg1MTJ2NTEySDB6Ii8+CiAgPHVzZSB4bGluazpocmVmPSIjY24tYSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjggMTI4KXNjYWxlKDc2LjgpIi8+CiAgPHVzZSB4bGluazpocmVmPSIjY24tYSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTIxIDE0Mi42IC00NylzY2FsZSgyNS41ODI3KSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2NuLWEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTk4LjEgMTk4IC04MilzY2FsZSgyNS42KSIvPgogIDx1c2UgeGxpbms6aHJlZj0iI2NuLWEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIyMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTc0IDI3Mi40IC0xMTQpc2NhbGUoMjUuNjEzNykiLz4KICA8dXNlIHhsaW5rOmhyZWY9IiNjbi1hIiB3aWR0aD0iMzAiIGhlaWdodD0iMjAiIHRyYW5zZm9ybT0ibWF0cml4KDE2IC0xOS45NjggMTkuOTY4IDE2IDI1NiAyMzAuNCkiLz4KPC9zdmc+Cg==",
   jp: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJmbGFnLWljb25zLWpwIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImpwLWEiPgogICAgICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii43IiBkPSJNMTc3LjIgMGg3MDguNnY3MDguN0gxNzcuMnoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgogIDxnIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLXdpZHRoPSIxcHQiIGNsaXAtcGF0aD0idXJsKCNqcC1hKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEyOClzY2FsZSguNzIyNDkpIj4KICAgIDxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoMTA2M3Y3MDguN0gweiIvPgogICAgPGNpcmNsZSBjeD0iNTIzLjEiIGN5PSIzNDQuMSIgcj0iMTk0LjkiIGZpbGw9IiNiYzAwMmQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01OS43IC0zNC41KXNjYWxlKDEuMTMwMikiLz4KICA8L2c+Cjwvc3ZnPgo=",
@@ -86,7 +87,8 @@ const TERM = [
       { lang:"Hindi",    flag:"in", phrase:"“The whole world is one family”", gloss:"वसुधैव कुटुम्बकम्", roman:"vasudhaiva kutumbakam" },
       { lang:"Mongolian",flag:"mn", phrase:"“A near neighbour is better than a distant relative”",
         gloss:"Ойрын хөрш холын садангаас дээр",
-        roman:"Oiryn khörsh kholyn sadangaas deer", objPos:"left center" }
+        roman:"Oiryn khörsh kholyn sadangaas deer", objPos:"left center" },
+      { lang:"Irish", flag:"ie", phrase:"“Under the shelter of each other, people survive”", gloss:"Ar scáth a chéile a mhaireann na daoine", contributor:"Sol Wright" }
     ]
   }
 ];
@@ -113,6 +115,7 @@ if(nav){ addEventListener("scroll", function(){ nav.classList.toggle("scrolled",
   var miSay  = document.getElementById("mi-saying");
   var miMean = document.getElementById("mi-meaning");
   var miRom  = document.getElementById("mi-roman");
+  var miThanks = document.getElementById("mi-thanks");
   var slide  = document.getElementById("cSlide");
 
   var viewIdx = CURRENT;
@@ -146,6 +149,7 @@ if(nav){ addEventListener("scroll", function(){ nav.classList.toggle("scrolled",
     miLang.textContent=c.lang; miSay.textContent=c.phrase; miMean.textContent=c.gloss;
     if(c.roman){ miRom.textContent=c.roman; miRom.style.display=""; }
     else { miRom.textContent=""; miRom.style.display="none"; }
+    if(miThanks){ if(c.contributor){ miThanks.textContent="Shared by "+c.contributor+", thank you"; miThanks.style.display=""; } else { miThanks.textContent=""; miThanks.style.display="none"; } }
   }
 
   function update(n){
