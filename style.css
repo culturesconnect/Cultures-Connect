@@ -311,3 +311,6 @@ body.is-animating .idiom .w>span{ transform:translateY(110%); }
 .sv-btn{ border:none; border-radius:10px; padding:11px 22px; font-size:14px; font-weight:600; font-family:inherit; cursor:pointer; }
 .sv-yes{ background:var(--teal); color:#fff; } .sv-yes:hover{ background:#256355; }
 .sv-no{ background:var(--terra); color:#fff; } .sv-no:hover{ background:#B14A2C; }
+
+/* Thank-you line for contributed idioms */
+.mi-thanks{ font-size:12.5px; color:var(--teal); font-style:italic; margin-top:10px; }
